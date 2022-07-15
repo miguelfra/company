@@ -16,7 +16,7 @@ export default {
       this.$alertify.confirm(
         `<h3>are you sure to delete ${this.item.name}</h3>`,
         async () => {
-          await axios.delete(`http://localhost:3000/api/products/${id}`, {
+          await axios.delete(`https://company-api-v2.herokuapp.com/api/products/${id}`, {
             headers: {
               "x-access-token": token,
             },

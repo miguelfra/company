@@ -1,18 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NotFound from '../views/404.vue'
 import Products from '../views/products/Products.vue'
 import NewProduct from '../views/products/newProduct.vue'
 import EditProduct from '../views/products/EditProduct.vue'
 import Signin from '../views/auth/Signin.vue'
 import Signup from '../views/auth/Signup.vue'
+import AdminPanel from '../views/admin/AdminPanel.vue'
+import EditRol from '../views/admin/EditRol.vue'
+import DeleteUser from '../views/admin/DeletUser.vue'
 import Home from '../views/Home.vue'
+import NotFound from '../views/404.vue'
 import store from '../store/index'
 
 Vue.use(VueRouter)
 
-const token = store.state.token;
-
+//const token = store.state.token;
+const rol = localStorage.getItem('rol')
+let admin;
+if (rol == "admin") {
+  admin = true;
+}
 const routes = [
   {
     path: '*',
@@ -56,6 +63,33 @@ const routes = [
     component: EditProduct
   },
 
+  {
+    path: '/adminPanel',
+    name: 'admin',
+    meta: {
+      admin: true
+    },
+    component: AdminPanel
+  },
+
+  {
+    path: '/editRol',
+    name: 'editRol',
+    meta: {
+      admin: true
+    },
+    component: EditRol
+  },
+
+  {
+    path: '/deleteUser',
+    name: 'deleteUser',
+    meta: {
+      admin: true
+    },
+    component: DeleteUser
+  },
+
 ]
 
 const router = new VueRouter({
@@ -74,6 +108,12 @@ router.beforeEach((to, from, next) => {
   }else if (to.matched.some(route => route.meta.notToken)) {
     if (localStorage.getItem('token')) {
       next('/products')
+    } else {
+      next()
+    }
+  } else if (to.matched.some(route => route.meta.admin)) {
+    if (!admin) {
+      next('/')
     } else {
       next()
     }

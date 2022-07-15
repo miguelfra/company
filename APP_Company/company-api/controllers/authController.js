@@ -6,17 +6,17 @@ const authController = {
     singnUp: async (req, res) => {
        try {
         const {username, email, password} = req.body;
+        const rol = 'user'
         const passwordHash =  await encryptPassword(password);
-         
-        await DB.query(`INSERT INTO users(username, email, password, rol) VALUES('${username}', '${email}', '${passwordHash}', 'user')`, (err, row) => {
+        await DB.query(`INSERT INTO users(username, email, password, rol) VALUES('${username}', '${email}', '${passwordHash}', '${rol}')`, (err, row) => {
             if (!err) {
                 const token = jwt.sign({id: row.insertId}, 'products-api', {
                     expiresIn: 86400 //24 hours
                 })
 
-                res.json({token, username: username});
+                res.json({token, rol: rol});
             } else {
-                console.log(err);
+                console.log(err); 
             }
              
        });
@@ -35,7 +35,7 @@ const authController = {
          const token = jwt.sign({id: rows[0].id}, 'products-api', {
             expiresIn: 86400
           })       
-          res.json({token,username: rows[0].username});
+          res.json({token, rol: rows[0].rol});
    });
         
 

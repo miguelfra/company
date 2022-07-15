@@ -7,6 +7,7 @@ export default {
     methods: {
         Logout() {
             localStorage.removeItem('token');
+            localStorage.removeItem('rol');
             window.location.href = '/signin'
         }
     }

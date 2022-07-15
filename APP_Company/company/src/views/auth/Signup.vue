@@ -75,9 +75,10 @@ export default {
     async Signup() {
       try {
         if (this.$refs.form.validate()) {
-          const NewUser = await axios.post("http://localhost:3000/api/auth/signup",this.user);
+          const NewUser = await axios.post("https://company-api-v2.herokuapp.com/api/auth/signup",this.user);
           localStorage.setItem('token', NewUser.data.token);
-          window.location.href = '/products'
+          localStorage.setItem('rol', NewUser.data.rol)
+          window.location.href = '/'
         } else {
           this.$alertify.error("llena Todos los campos");
         }

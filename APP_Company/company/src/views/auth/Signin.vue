@@ -66,10 +66,10 @@ export default {
     try {
        if (this.$refs.form.validate()) {
         
-        const data = await axios.post("http://localhost:3000/api/auth/signin", this.user)
+        const data = await axios.post("https://company-api-v2.herokuapp.com/api/auth/signin", this.user)
         localStorage.setItem('token', data.data.token);
-        
-            window.location.href = '/products'
+        localStorage.setItem('rol', data.data.rol)
+            window.location.href = '/'
       }else{
        this.$alertify.error('llena Todos los campos')
       }

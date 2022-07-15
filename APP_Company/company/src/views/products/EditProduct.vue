@@ -82,7 +82,7 @@ export default {
       try {
         const { id } = this.$route.params;
         const product = await axios.get(
-          `http://localhost:3000/api/products/${id}`,
+          `https://company-api-v2.herokuapp.com/api/products/${id}`,
           {
             headers: {
               "x-access-token": token,
