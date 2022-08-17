@@ -13,7 +13,6 @@
     <router-link to="/" class="btn btn-primary fw-bold mb-10 text-h5 white--text  text-center"
       >Return Home</router-link
     >
-    <!--end::Link-->
   </div>
 </template>
 
