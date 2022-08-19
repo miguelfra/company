@@ -32,13 +32,6 @@
         required
       ></v-text-field>
 
-      <v-text-field
-        class="white--text"
-        color="primary"
-        v-model="product.imgUrl"
-        label="image url"
-      ></v-text-field>
-
       <div class="d-flex justify-end">
         <v-btn color="success" class="mr-4" @click="NewProduct">
           Create Product
@@ -57,7 +50,6 @@ export default {
       name: "",
       category: "",
       price: "",
-      imgUrl: "",
     },
     name: [(v) => !!v || "name is required"],
     category: [(v) => !!v || "category is required"],

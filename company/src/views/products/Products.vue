@@ -90,7 +90,7 @@
                 font-size
               "
             >
-              {{ item.price }}
+              {{ item.price }} <span>USD</span>
             </td>
 
             <td class="blue-grey font-weight-bold darken-3 border-bottom">
@@ -120,7 +120,7 @@
      </div>
    
 
-    <div class="error pa-16 rounded-xl font-weight-bold" v-if="!condition">
+    <div transition="fade" class="error pa-16 rounded-xl font-weight-bold" v-if="!condition">
       <div class="text-center">
         <p>No hay ningun Producto guardado aun.</p>
         <router-link to="/newProduct">Crea uno!</router-link>
@@ -185,5 +185,8 @@ export default {
 }
 .font-size {
   font-size: 20px !important;
+}
+span{
+  color: white;
 }
 </style>

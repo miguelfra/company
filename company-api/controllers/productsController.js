@@ -1,12 +1,12 @@
 const DB = require('../database');
 const jwt = require('jsonwebtoken');
 const productsController = {
-
+ 
     createProduct: async (req, res) => {
-        const {name, category, price, imgUrl} = req.body;
+        const {name, category, price} = req.body;
         const token = req.headers['x-access-token'];
         const {id} = jwt.verify(token, 'products-api');
-        await DB.query(`INSERT INTO products(id_usuario,name, category, price, imgUrl) VALUES (${id},'${name}', '${category}', ${price}, '${imgUrl}')`, (err) => {
+        await DB.query(`INSERT INTO products(id_usuario,name, category, price) VALUES (${id}, '${name}', '${category}', ${price})`, (err) => {
             if (!err) {
                 res.json({
                     Message: 'Article Saved',
@@ -44,8 +44,8 @@ const productsController = {
 
     UpdateProductById: async (req, res) => {
         const {id} = req.params; 
-        const {name, category, price, imgUrl} = req.body;
-        await DB.query(`UPDATE products SET name = '${name}', category = '${category}', price = ${price}, imgUrl = '${imgUrl}'  WHERE id = ${id}`, (err) => {
+        const {name, category, price} = req.body;
+        await DB.query(`UPDATE products SET name = '${name}', category = '${category}', price = ${price} WHERE id = ${id}`, (err) => {
             if (!err) {
                 res.status(204).json('article Updated')
             } else {

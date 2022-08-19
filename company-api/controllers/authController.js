@@ -8,7 +8,7 @@ const authController = {
         const {username, email, password} = req.body;
         const rol = 'user'
         const passwordHash =  await encryptPassword(password);
-        await DB.query(`INSERT INTO users(username, email, password, rol) VALUES('${username}', '${email}', '${passwordHash}', '${rol}')`, (err, row) => {
+        await DB.query(`INSERT INTO user(username, email, password, rol) VALUES('${username}', '${email}', '${passwordHash}', '${rol}')`, (err, row) => {
             if (!err) {
                 const token = jwt.sign({id: row.insertId}, 'products-api', {
                     expiresIn: 86400 //24 hours
@@ -26,10 +26,11 @@ const authController = {
     },
 
     singnIn: async (req, res) => {
-    await DB.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, async (err, rows) => {
+    await DB.query(`SELECT * FROM user WHERE email = '${req.body.email}'`, async (err, rows) => {
         if (rows.length == 0) return res.status(400).json({Message: 'User not Found'}); 
 
          const matchPassword = await comparePassword(req.body.password, rows[0].password);
+       
          if (!matchPassword) return res.status(401).json({token: null, Message: 'Invalid password'});
 
          const token = jwt.sign({id: rows[0].id}, 'products-api', {

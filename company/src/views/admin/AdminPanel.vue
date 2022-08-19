@@ -60,7 +60,7 @@ export default {
 
   methods: {
     async GetUsers() {
-      const data = await axios("http://localhost:3000/api/admin/user", {
+      const data = await axios("https://company-api-v1.herokuapp.com/api/admin/user", {
         headers: {
           "x-access-token": token,
         },

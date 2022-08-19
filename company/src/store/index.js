@@ -27,7 +27,7 @@ export default new Vuex.Store({
     },
 
     async GETProductsAction(context){
-      const products = await axios('http://localhost:3000/api/products', {
+      const products = await axios('https://company-api-v1.herokuapp.com/api/products', {
         headers: {
           "x-access-token":  token
         }
@@ -37,7 +37,7 @@ export default new Vuex.Store({
     },
 
     async newProduct(context, product) {
-       axios.post('http://localhost:3000/api/products', product, {
+       axios.post('https://company-api-v1.herokuapp.com/api/products', product, {
         headers: {
           "x-access-token":  token
         }
@@ -45,7 +45,7 @@ export default new Vuex.Store({
     },
 
     async EditProduct(context, product) {
-      axios.put(`http://localhost:3000/api/products/${product.id}`, product, {
+      axios.put(`https://company-api-v1.herokuapp.com/api/products/${product.id}`, product, {
        headers: {
          "x-access-token":  token
        }

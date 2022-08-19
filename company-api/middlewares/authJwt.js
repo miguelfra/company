@@ -10,7 +10,7 @@ const autJwt = {
 
             const decode = jwt.verify(token, 'products-api');
 
-            await DB.query(`SELECT * FROM users WHERE id = ${decode.id}`, (err, rows) => {
+            await DB.query(`SELECT * FROM user WHERE id = ${decode.id}`, (err, rows) => {
                 if (rows.length == 0) return res.status(404).json({ message: 'no user found' })
 
             })

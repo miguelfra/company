@@ -11,6 +11,7 @@
         v-model="user.username"
         :rules="usernameRules"
         label="username"
+        @keydown.enter="Signup"
         required
       ></v-text-field>
 
@@ -20,6 +21,7 @@
         v-model="user.email"
         :rules="emailRules"
         label="E-mail"
+        @keydown.enter="Signup"
         required
       ></v-text-field>
 
@@ -32,6 +34,7 @@
         label="Password"
         hint="At least 8 characters"
         counter
+        @keydown.enter="Signup"
         @click:append="show1 = !show1"
       ></v-text-field>
 
@@ -75,10 +78,10 @@ export default {
     async Signup() {
       try {
         if (this.$refs.form.validate()) {
-          const NewUser = await axios.post("http://localhost:3000/api/auth/signup",this.user);
+          const NewUser = await axios.post("https://company-api-v1.herokuapp.com/api/auth/signup",this.user);
           localStorage.setItem('token', NewUser.data.token);
           localStorage.setItem('rol', NewUser.data.rol)
-          window.location.href = '/'
+          window.location.href = '/products'
         } else {
           this.$alertify.error("llena Todos los campos");
         }

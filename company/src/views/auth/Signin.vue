@@ -10,6 +10,7 @@
         v-model="user.email"
         :rules="emailRules"
         label="E-mail"
+        @keydown.enter="Signin"
         required
       ></v-text-field>
 
@@ -24,6 +25,7 @@
             hint="At least 8 characters"
             counter
             @click:append="show1 = !show1"
+            @keydown.enter="Signin"
           ></v-text-field>
       
 
@@ -66,10 +68,10 @@ export default {
     try {
        if (this.$refs.form.validate()) {
         
-        const data = await axios.post("http://localhost:3000/api/auth/signin", this.user)
+        const data = await axios.post("https://company-api-v1.herokuapp.com/api/auth/signin", this.user)
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('rol', data.data.rol)
-            window.location.href = '/'
+            window.location.href = '/products'
       }else{
        this.$alertify.error('llena Todos los campos')
       }

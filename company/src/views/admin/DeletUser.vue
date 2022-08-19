@@ -144,7 +144,7 @@ export default {
         `<h3>are you sure  to delete this User</h3>`,
         async () => {
           await axios.delete(
-            `http://localhost:3000/api/admin/userDelete/${id}`,
+            `https://company-api-v1.herokuapp.com/api/admin/userDelete/${id}`,
             {
               headers: {
                 "x-access-token": localStorage.getItem("token"),
@@ -166,7 +166,7 @@ export default {
           this.user = false;
         } else {
           const data = await axios(
-            `http://localhost:3000/api/admin/user/${search}`,
+            `https://company-api-v1.herokuapp.com/api/admin/user/${search}`,
             {
               headers: {
                 "x-access-token": localStorage.getItem("token"),

@@ -165,7 +165,7 @@ export default {
           this.user = false;
         } else {
           const data = await axios(
-            `http://localhost:3000/api/admin/user/${search}`,
+            `https://company-api-v1.herokuapp.com/api/admin/user/${search}`,
             {
               headers: {
                 "x-access-token": localStorage.getItem("token"),
@@ -177,7 +177,7 @@ export default {
       } catch (error) {}
     },
 async newProduct(context, product) {
-       axios.post('http://localhost:3000/api/products', product, {
+       axios.post('https://company-api-v1.herokuapp.com/api/products', product, {
         headers: {
           "x-access-token":  token
         }
@@ -185,7 +185,7 @@ async newProduct(context, product) {
     },
     async editUser() {
        axios.put(
-        `http://localhost:3000/api/admin/userRol/${this.user.id}`,
+        `https://company-api-v1.herokuapp.com/api/admin/userRol/${this.user.id}`,
         {rol: this.user.rol},
         {
           headers: {

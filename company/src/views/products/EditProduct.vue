@@ -32,13 +32,6 @@
         required
       ></v-text-field>
 
-      <v-text-field
-        class="white--text"
-        color="primary"
-        v-model="product.imgUrl"
-        label="image url"
-      ></v-text-field>
-
       <div class="d-flex justify-end">
         <v-btn color="success" class="mr-4" @click="EditProduct">
           Edit Product
@@ -82,7 +75,7 @@ export default {
       try {
         const { id } = this.$route.params;
         const product = await axios.get(
-          `http://localhost:3000/api/products/${id}`,
+          `https://company-api-v1.herokuapp.com/api/products/${id}`,
           {
             headers: {
               "x-access-token": token,
@@ -90,7 +83,6 @@ export default {
           }
         );
        this.product = product.data;
-        console.log('bien');
       } catch (error) {
         this.$alertify.error(error.response.data.message);
         this.$router.push("/products");
